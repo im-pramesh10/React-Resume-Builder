@@ -1,0 +1,40 @@
+.intro-container {
+    margin-bottom: 20px ;
+}
+.full-name {
+    font-size: 40px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.first-name {
+    font-weight: 700;
+}
+
+.last-name {
+    font-weight: 300;
+}
+
+.contact-info {
+    margin-bottom: 20px;
+}
+
+.email,
+.phone {
+    color: #999;
+    font-weight: 300;
+}
+
+.separator {
+    height: 10px;
+    display: inline-block;
+    border-left: 2px solid #999;
+    margin: 0 10px;
+}
+
+.position {
+    font-weight: bold;
+    display: inline-block;
+    margin-right: 10px;
+    text-decoration: underline;
+}
