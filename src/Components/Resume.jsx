@@ -2,12 +2,12 @@ import Education from "./Education";
 import Experience from "./Experience";
 import Introduction from "./Introduction";
 import Skills from "./Skills";
-import resumeObj from "../Data/ResumeObj";
 import "./Resume.css"
-const Resume = () => {
+const Resume = ({resumeObj}) => {
 
     return (
         <>
+            <button className="noPrint" onClick={()=>window.print()}>Print</button>
             <Introduction {...resumeObj.introduction}></Introduction>
             {
             // expression start
@@ -34,7 +34,7 @@ const Resume = () => {
                 resumeObj.skills.map(skill => <Skills skill={skill}></Skills>)
             } </>
         }
-            <button className="noPrint" onClick={()=>window.print()}>Print</button>
+           
         </>
     );
 }
