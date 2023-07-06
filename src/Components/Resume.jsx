@@ -33,7 +33,9 @@ const Resume = () => {
                 {
                 resumeObj.skills.map(skill => <Skills skill={skill}></Skills>)
             } </>
-        } </>
+        }
+            <button className="noPrint" onClick={()=>window.print()}>Print</button>
+        </>
     );
 }
 
