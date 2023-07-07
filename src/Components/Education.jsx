@@ -1,4 +1,10 @@
-const Education = ({Institution, Location, Duration}) => {
+const Education = ({
+    Institution,
+    Location,
+    Duration,
+    deleteEduExp,
+    id
+}) => {
     return (
         <>
             <div className="institution">
@@ -6,7 +12,12 @@ const Education = ({Institution, Location, Duration}) => {
             <div className="location">
                 {Location}</div>
             <div className="duration">
-                {Duration}</div><br/><br/>
+                {Duration}</div>
+            <button className="noPrint" onClick={
+                () => deleteEduExp(id, "edu")
+            }>Delete</button>
+
+            <br/><br/>
         </>
     );
 }

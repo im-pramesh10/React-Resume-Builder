@@ -3,18 +3,28 @@ import Experience from "./Experience";
 import Introduction from "./Introduction";
 import Skills from "./Skills";
 import "./Resume.css"
-const Resume = ({resumeObj}) => {
+const Resume = ({resumeObj, deleteEduExp}) => {
 
     return (
         <>
-            <button className="noPrint" onClick={()=>window.print()}>Print</button>
+            <button className="noPrint"
+                onClick={
+                    () => window.print()
+            }>Print</button>
             <Introduction {...resumeObj.introduction}></Introduction>
             {
             // expression start
             resumeObj.experience.length !== 0 && <>
                 <div className="title">EXPIERIENCE</div>
                 {
-                resumeObj.experience.map(experienceObj => <Experience key={experienceObj.id} {...experienceObj}></Experience>)
+                resumeObj.experience.map((experienceObj) => <Experience key={
+                        experienceObj.id
+                    }
+                    {...experienceObj}
+                    deleteEduExp={deleteEduExp}
+                    id={
+                        experienceObj.id
+                }></Experience>)
             } </>
         }
             {
@@ -22,7 +32,14 @@ const Resume = ({resumeObj}) => {
             resumeObj.education.length !== 0 && <>
                 <div className="title">EDUCATION</div>
                 {
-                resumeObj.education.map(educationObj => <Education key={educationObj.id} {...educationObj}></Education>)
+                resumeObj.education.map(educationObj => <Education key={
+                        educationObj.id
+                    }
+                    {...educationObj}
+                    deleteEduExp={deleteEduExp}
+                    id={
+                        educationObj.id
+                }></Education>)
             } </>
         }
 
@@ -31,11 +48,10 @@ const Resume = ({resumeObj}) => {
             resumeObj.skills.length !== 0 && <>
                 <div className="title">SKILLS</div>
                 {
-                resumeObj.skills.map((skill,index) => <Skills key={index} skill={skill}></Skills>)
+                resumeObj.skills.map((skill, index) => <Skills key={index}
+                    skill={skill}></Skills>)
             } </>
-        }
-           
-        </>
+        } </>
     );
 }
 
