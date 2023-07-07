@@ -1,62 +1,24 @@
-import {useState} from "react";
-import {EducationForm, ExperienceForm, IntroductionForm, SkillForm} from "./Forms";
+import {IntroductionForm, EduExpForm, SkillForm} from "./Forms";
 
-const ResumeEditor = ({setResumeObj}) => {
-    const initialExperienceFormsArr = [];
-    const initialEducationFormsArr = [];
-    const [addExperienceForms, setAddExperienceForms] = useState(initialExperienceFormsArr);
-    const [addEducationForms, setAddEducationForms] = useState(initialEducationFormsArr);
-    function handleAddExperiencePlusButton(e) {
-        e.preventDefault();
-        setAddExperienceForms([
-            ...addExperienceForms,
-            <ExperienceForm></ExperienceForm>
-        ])
-    }
-    function handleAddEducationPlusButton(e) {
-        e.preventDefault();
-        setAddEducationForms([
-            ...addEducationForms,
-            <EducationForm></EducationForm>
-        ])
-    }
+const ResumeEditor = ({handleIntroData, handleEduData, handleExpData, handleSkillData}) => {
     return (
         <div className="noPrint editorContainer">
             <div className="introForm">
                 <h3>Introduction</h3>
-                <IntroductionForm setResumeObj={setResumeObj}></IntroductionForm>
+                <IntroductionForm handleIntroData={handleIntroData}></IntroductionForm>
             </div>
             <div className="expForms">
                 <h3>Experience</h3>
-                <ExperienceForm></ExperienceForm>
-                {
-                addExperienceForms.map((form, index) => (
-                    <div key={index}>
-                        {form}</div>
-                ))
-            }
-
-                <button onClick={
-                    (e) => handleAddExperiencePlusButton(e)
-                }>+</button>
+                <EduExpForm handleEduExpData={handleExpData}></EduExpForm>
             </div>
             <div className="eduForms">
                 <h3>Education</h3>
-                <EducationForm></EducationForm>
-                {
-                addEducationForms.map((form, index) => (
-                    <div key={index}>
-                        {form}</div>
-                ))
-            }
-
-                <button onClick={
-                    (e) => handleAddEducationPlusButton(e)
-                }>+</button>
+                <EduExpForm handleEduExpData={handleEduData}></EduExpForm>
+                
             </div>
             <div className="skillForm">
                 <h3>Skills</h3>
-                <SkillForm></SkillForm>
+                <SkillForm handleSkillData={handleSkillData}></SkillForm>
             </div>
         </div>
     );

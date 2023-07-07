@@ -14,7 +14,7 @@ const Resume = ({resumeObj}) => {
             resumeObj.experience.length !== 0 && <>
                 <div className="title">EXPIERIENCE</div>
                 {
-                resumeObj.experience.map(experienceObj => <Experience {...experienceObj}></Experience>)
+                resumeObj.experience.map(experienceObj => <Experience key={experienceObj.id} {...experienceObj}></Experience>)
             } </>
         }
             {
@@ -22,7 +22,7 @@ const Resume = ({resumeObj}) => {
             resumeObj.education.length !== 0 && <>
                 <div className="title">EDUCATION</div>
                 {
-                resumeObj.education.map(educationObj => <Education {...educationObj}></Education>)
+                resumeObj.education.map(educationObj => <Education key={educationObj.id} {...educationObj}></Education>)
             } </>
         }
 
@@ -31,7 +31,7 @@ const Resume = ({resumeObj}) => {
             resumeObj.skills.length !== 0 && <>
                 <div className="title">SKILLS</div>
                 {
-                resumeObj.skills.map(skill => <Skills skill={skill}></Skills>)
+                resumeObj.skills.map((skill,index) => <Skills key={index} skill={skill}></Skills>)
             } </>
         }
            

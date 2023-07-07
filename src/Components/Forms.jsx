@@ -1,97 +1,163 @@
 // import resumeObj from "../Data/ResumeObj";
 
-const IntroductionForm = ({setResumeObj}) => {
+import {useState} from "react";
+
+function generateUniqueId() {
+    return Math.random().toString(36).substring(2) + Date.now().toString(36);
+}
+
+
+const IntroductionForm = ({handleIntroData}) => {
+    const initialIntroData = {
+        FirstName: "",
+        LastName: "",
+        Email: "",
+        Phone: "",
+        Position: "",
+        Bio: ""
+    }
+    const [introductionData, setIntroductionData] = useState(initialIntroData)
 
     function handleAddButton(e) {
         e.preventDefault();
+        e.stopPropagation();
         // console.log(e);
-        const data = [
-            e.target.form[0].value,
-            e.target.form[1].value,
-            e.target.form[2].value,
-            e.target.form[3].value,
-            e.target.form[4].value,
-            e.target.form[5].value
-        ]
-        if (data.some(datum => datum === "")) {
-            alert("Please Fill all Info.")
-        } else {
-            const exp = {
-                FirstName: data[0],
-                LastName: data[1],
-                Email: data[2],
-                Phone: data[3],
-                Position: data[4],
-                Bio: data[5]
-            }
-            console.log(exp);
-            setResumeObj(exp);
-
-        }
+        handleIntroData(introductionData);
+    }
+    function handleChange(e) {
+        console.log(e.target.value)
+        setIntroductionData({
+            ...introductionData,
+            [e.target.name]: e.target.value
+        })
+        // console.log(introductionData)
     }
     return (
         <div className="introduction">
             <form>
-                <input placeholder="First Name"/>
-                <input placeholder="Last Name"/>
-                <input type="email" placeholder="Email"/>
-                <input type="number" min="0" placeholder="Phone"/>
-                <input placeholder="Position"/>
-                <input placeholder="Bio/About"/>
-                <button type="submit"
-                    onClick={
-                        (e) => handleAddButton(e)
-                }>Add</button>
+                <input onChange={handleChange}
+                    name="FirstName"
+                    placeholder="First Name"/>
+                <input onChange={handleChange}
+                    name="LastName"
+                    placeholder="Last Name"/>
+                <input onChange={handleChange}
+                    name="Email"
+                    type="email"
+                    placeholder="Email"/>
+                <input onChange={handleChange}
+                    name="Phone"
+                    type="number"
+                    min="0"
+                    placeholder="Phone"/>
+                <input onChange={handleChange}
+                    name="Position"
+                    placeholder="Position"/>
+                <input onChange={handleChange}
+                    name="Bio"
+                    placeholder="Bio/About"/>
+                <button onClick={handleAddButton}>Add</button>
             </form>
         </div>
     );
 }
-const EducationForm = () => {
+const EduExpForm = ({handleEduExpData}) => {
+    const initialEduData = {
+        Institution: "",
+        Location: "",
+        Duration: ""
+    }
+
+    const [educationData, setEducationData] = useState(initialEduData)
+
+    function handleAddButton(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        // console.log(e);
+        let dataArr = [];
+        for (const key in educationData) {
+            dataArr.push(educationData[key])
+        }
+        // console.log(dataArr);
+        if (dataArr.some(datum => datum === "")) {
+            alert("Please Fill all Info.")
+        } else {
+            const newEduObj = {
+                ...educationData,
+                id: generateUniqueId()
+            }
+            handleEduExpData(newEduObj);
+            setEducationData(initialEduData)
+        }
+    }
+
+    function handleChange(e) { // console.log(e.target.value)
+        setEducationData({
+            ...educationData,
+            [e.target.name]: e.target.value
+        })
+        // console.log(introductionData)
+    }
+    // console.log(e);
+
+
     return (
         <div className="education">
             <form>
-                <input placeholder="Institution"/>
-                <input placeholder="Location (Eg. townname,someplace)"/>
-                <input placeholder="Duration (2000-2004)"/>
-                <button onClick={
-                    (e) => e.preventDefault()
-                }>Add</button>
+                <input name="Institution"
+                    value={
+                        educationData.Institution
+                    }
+                    onChange={handleChange}
+                    placeholder="Institution"/>
+                <input name="Location"
+                    value={
+                        educationData.Location
+                    }
+                    onChange={handleChange}
+                    placeholder="Location (Eg. townname,someplace)"/>
+                <input name="Duration"
+                    value={
+                        educationData.Duration
+                    }
+                    onChange={handleChange}
+                    placeholder="Duration (2000-2004)"/>
+                <button onClick={handleAddButton}>Add</button>
             </form>
         </div>
     );
 }
 
-const ExperienceForm = () => {
-    return (
-        <div className="experience">
-            <form>
-                <input placeholder="Institution"/>
-                <input placeholder="Location (Eg. townname,someplace)"/>
-                <input placeholder="Duration (2000-2004)"/>
-                <button onClick={
-                    (e) => e.preventDefault()
-                }>Add</button>
-            </form>
-        </div>
-    );
-}
+const SkillForm = ({handleSkillData}) => {
+    function handleAddButton(e) {
+        e.preventDefault();
+        // console.log(e.target.form[0].value);
+        const skillsStr = e.target.form[0].value
+        let skillsArr = []
+        skillsStr.split(',').forEach(element => {
+            const trimmedElement = element.trim()
+            if (trimmedElement !== "") {
+                skillsArr.push(trimmedElement)
+            }
+        });
 
-const SkillForm = () => {
+        // console.log(skillsArr);
+        handleSkillData(skillsArr)
+
+    }
+
     return (
+
         <div className="skills">
             <form>
-                <input placeholder="js, css (use comma to separate)"/>
-                <button onClick={
-                    (e) => e.preventDefault()
-                }>Add</button>
+                <input placeholder="js,css (use comma to separate)"/>
+                <button onClick={handleAddButton}>Add</button>
             </form>
         </div>
     );
 }
-
 export {
     SkillForm,
-    ExperienceForm,
-    EducationForm,
+    EduExpForm,
     IntroductionForm
 };

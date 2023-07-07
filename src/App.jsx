@@ -18,31 +18,43 @@ function App() {
         skills: []
     }
     const [resumeObj, setResumeObj] = useState(initialResumeObjState)
+    
     function handleIntroData(exp){
         setResumeObj({...resumeObj,introduction:exp});
     }
-    let experienceObj = {
-        Institution: "Abc university",
-        Location: "place, japan",
-        Duration: "2015-2017",
-        setState: () => {
-            setResumeObj((resumeObjContent) => {
-                return {
-                    ...resumeObjContent,
-                    experience: [
-                        ...resumeObjContent.experience, {
-                            Institution: this.Institution,
-                            Location: this.Location,
-                            Duration: this.Duration
-                        }
-                    ]
-                }
-            })
-        }
+
+    function handleEduData(edu){
+        setResumeObj({...resumeObj,education:[...resumeObj.education,edu]});
     }
+    function handleExpData(exp){
+        setResumeObj({...resumeObj,experience:[...resumeObj.experience,exp]});
+    }
+    function handleSkillData(skill){
+        setResumeObj({...resumeObj,skills:skill});
+    }
+
+    // let experienceObj = {
+    //     Institution: "Abc university",
+    //     Location: "place, japan",
+    //     Duration: "2015-2017",
+    //     setState: () => {
+    //         setResumeObj((resumeObjContent) => {
+    //             return {
+    //                 ...resumeObjContent,
+    //                 experience: [
+    //                     ...resumeObjContent.experience, {
+    //                         Institution: this.Institution,
+    //                         Location: this.Location,
+    //                         Duration: this.Duration
+    //                     }
+    //                 ]
+    //             }
+    //         })
+    //     }
+    // }
     return (
         <>
-            <ResumeEditor setResumeObj={handleIntroData}></ResumeEditor>
+            <ResumeEditor handleIntroData={handleIntroData} handleEduData={handleEduData} handleExpData={handleExpData} handleSkillData={handleSkillData}></ResumeEditor>
             <Resume resumeObj={resumeObj}></Resume>
         </>
     )
