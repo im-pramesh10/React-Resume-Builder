@@ -1,11 +1,14 @@
+import { useContext } from "react";
+import DispatchResumeObjContext from "../Contexts/DispatchResumeObjContext";
+
 const Education = ({
     Institution,
     Location,
     Duration,
-    dispatchResumeObj,
     id,
     setEditableEduExpObj
 }) => {
+    const dispatchResumeObj=useContext(DispatchResumeObjContext);
     return (
         <>
             <div className="institution">

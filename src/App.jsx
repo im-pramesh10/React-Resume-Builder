@@ -2,6 +2,7 @@ import {useReducer, useState} from 'react'
 import './App.css'
 import Resume from './Components/Resume'
 import ResumeEditor from './Components/ResumeEditor'
+import DispatchResumeObjContext from './Contexts/DispatchResumeObjContext'
 
 function App() {
     const initialResumeObjState = {
@@ -100,14 +101,13 @@ function App() {
     }
 
     return (
-        <>
-            <ResumeEditor dispatchResumeObj={dispatchResumeObj}
-                editableEduObj={editableEduObj}
+
+        <DispatchResumeObjContext.Provider value={dispatchResumeObj}>
+            <ResumeEditor editableEduObj={editableEduObj}
                 editableExpObj={editableExpObj}></ResumeEditor>
             <Resume resumeObj={resumeObj}
-                dispatchResumeObj={dispatchResumeObj}
                 setEditableEduExpObj={setEditableEduExpObj}></Resume>
-        </>
+        </DispatchResumeObjContext.Provider>
     )
 }
 

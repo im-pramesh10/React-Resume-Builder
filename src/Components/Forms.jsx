@@ -1,13 +1,14 @@
 // import resumeObj from "../Data/ResumeObj";
 
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
+import DispatchResumeObjContext from "../Contexts/DispatchResumeObjContext";
 
 function generateUniqueId() {
     return Math.random().toString(36).substring(2) + Date.now().toString(36);
 }
 
 
-const IntroductionForm = ({dispatchResumeObj}) => {
+const IntroductionForm = () => {
     const initialIntroData = {
         FirstName: "",
         LastName: "",
@@ -17,6 +18,7 @@ const IntroductionForm = ({dispatchResumeObj}) => {
         Bio: ""
     }
     const [introductionData, setIntroductionData] = useState(initialIntroData)
+    const dispatchResumeObj = useContext(DispatchResumeObjContext)
 
     function handleAddButton(e) {
         e.preventDefault();
@@ -60,7 +62,8 @@ const IntroductionForm = ({dispatchResumeObj}) => {
         </div>
     );
 }
-const EduExpForm = ({dispatchResumeObj, editableEduExpObj, type}) => {
+
+const EduExpForm = ({editableEduExpObj, type}) => {
     const initialEduData = {
         Institution: "",
         Location: "",
@@ -68,6 +71,7 @@ const EduExpForm = ({dispatchResumeObj, editableEduExpObj, type}) => {
     }
 
     const [educationData, setEducationData] = useState(initialEduData)
+    const dispatchResumeObj = useContext(DispatchResumeObjContext)
     useEffect(() => {
         if (editableEduExpObj) {
             setEducationData(editableEduExpObj)
@@ -151,7 +155,8 @@ const EduExpForm = ({dispatchResumeObj, editableEduExpObj, type}) => {
     );
 }
 
-const SkillForm = ({dispatchResumeObj}) => {
+const SkillForm = () => {
+    const dispatchResumeObj = useContext(DispatchResumeObjContext)
     function handleAddButton(e) {
         e.preventDefault();
         // console.log(e.target.form[0].value);
