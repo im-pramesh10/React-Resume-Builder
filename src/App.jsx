@@ -18,6 +18,9 @@ function App() {
         skills: []
     }
     const [resumeObj, setResumeObj] = useState(initialResumeObjState)
+    const [editableEduObj, setEditableEduObj] = useState(null)
+    const [editableExpObj, setEditableExpObj] = useState(null)
+
 
     function handleIntroData(exp) {
         setResumeObj({
@@ -63,15 +66,26 @@ function App() {
             })
         }
     }
+    function updateEduExp(id, type) {
+        if (type === "edu") {
+            setEditableEduObj(resumeObj.education.find(edu => edu.id === id))
+        } else if (type === "exp") {
+            setEditableExpObj(resumeObj.experience.find(exp => exp.id === id))
+        }
+        // console.log(editableEduExpObj)
+    }
 
     return (
         <>
             <ResumeEditor handleIntroData={handleIntroData}
                 handleEduData={handleEduData}
                 handleExpData={handleExpData}
-                handleSkillData={handleSkillData}></ResumeEditor>
+                handleSkillData={handleSkillData}
+                editableEduObj={editableEduObj}
+                editableExpObj={editableExpObj}></ResumeEditor>
             <Resume resumeObj={resumeObj}
-                deleteEduExp={deleteEduExp}></Resume>
+                deleteEduExp={deleteEduExp}
+                setEditableEduExpObj={updateEduExp}></Resume>
         </>
     )
 }

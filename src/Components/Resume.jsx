@@ -3,7 +3,7 @@ import Experience from "./Experience";
 import Introduction from "./Introduction";
 import Skills from "./Skills";
 import "./Resume.css"
-const Resume = ({resumeObj, deleteEduExp}) => {
+const Resume = ({resumeObj, deleteEduExp, setEditableEduExpObj}) => {
 
     return (
         <>
@@ -24,7 +24,8 @@ const Resume = ({resumeObj, deleteEduExp}) => {
                     deleteEduExp={deleteEduExp}
                     id={
                         experienceObj.id
-                }></Experience>)
+                    }
+                    setEditableEduExpObj={setEditableEduExpObj}></Experience>)
             } </>
         }
             {
@@ -39,7 +40,8 @@ const Resume = ({resumeObj, deleteEduExp}) => {
                     deleteEduExp={deleteEduExp}
                     id={
                         educationObj.id
-                }></Education>)
+                    }
+                    setEditableEduExpObj={setEditableEduExpObj}></Education>)
             } </>
         }
 

@@ -3,7 +3,8 @@ const Education = ({
     Location,
     Duration,
     deleteEduExp,
-    id
+    id,
+    setEditableEduExpObj
 }) => {
     return (
         <>
@@ -13,9 +14,14 @@ const Education = ({
                 {Location}</div>
             <div className="duration">
                 {Duration}</div>
-            <button className="noPrint" onClick={
-                () => deleteEduExp(id, "edu")
+            <button className="noPrint"
+                onClick={
+                    () => deleteEduExp(id, "edu")
             }>Delete</button>
+            <button className="noPrint"
+                onClick={
+                    () => setEditableEduExpObj(id, "edu")
+            }>Update</button>
 
             <br/><br/>
         </>

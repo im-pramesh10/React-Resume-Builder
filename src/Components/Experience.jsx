@@ -3,7 +3,8 @@ const Experience = ({
     Location,
     Duration,
     deleteEduExp,
-    id
+    id,
+    setEditableEduExpObj
 }) => {
     return (
         <>
@@ -13,9 +14,14 @@ const Experience = ({
                 {Location}</div>
             <div className="duration">
                 {Duration}</div>
-            <button className="noPrint" onClick={
-                () => deleteEduExp(id, "exp")
+            <button className="noPrint"
+                onClick={
+                    () => deleteEduExp(id, "exp")
             }>Delete</button>
+            <button className="noPrint"
+                onClick={
+                    () => setEditableEduExpObj(id, "exp")
+            }>Update</button>
 
             <br/><br/>
         </>

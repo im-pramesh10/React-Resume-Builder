@@ -1,6 +1,6 @@
 // import resumeObj from "../Data/ResumeObj";
 
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 function generateUniqueId() {
     return Math.random().toString(36).substring(2) + Date.now().toString(36);
@@ -61,7 +61,7 @@ const IntroductionForm = ({handleIntroData}) => {
         </div>
     );
 }
-const EduExpForm = ({handleEduExpData}) => {
+const EduExpForm = ({handleEduExpData, editableEduExpObj}) => {
     const initialEduData = {
         Institution: "",
         Location: "",
@@ -69,6 +69,11 @@ const EduExpForm = ({handleEduExpData}) => {
     }
 
     const [educationData, setEducationData] = useState(initialEduData)
+    useEffect(() => {
+        if (editableEduExpObj) {
+            setEducationData(editableEduExpObj)
+        }
+    }, [editableEduExpObj])
 
     function handleAddButton(e) {
         e.preventDefault();
