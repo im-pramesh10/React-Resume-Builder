@@ -3,7 +3,7 @@ import Experience from "./Experience";
 import Introduction from "./Introduction";
 import Skills from "./Skills";
 import "./Resume.css"
-const Resume = ({resumeObj, deleteEduExp, setEditableEduExpObj}) => {
+const Resume = ({resumeObj, dispatchResumeObj, setEditableEduExpObj}) => {
 
     return (
         <>
@@ -21,7 +21,7 @@ const Resume = ({resumeObj, deleteEduExp, setEditableEduExpObj}) => {
                         experienceObj.id
                     }
                     {...experienceObj}
-                    deleteEduExp={deleteEduExp}
+                    dispatchResumeObj={dispatchResumeObj}
                     id={
                         experienceObj.id
                     }
@@ -37,7 +37,7 @@ const Resume = ({resumeObj, deleteEduExp, setEditableEduExpObj}) => {
                         educationObj.id
                     }
                     {...educationObj}
-                    deleteEduExp={deleteEduExp}
+                    dispatchResumeObj={dispatchResumeObj}
                     id={
                         educationObj.id
                     }

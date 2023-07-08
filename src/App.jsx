@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useReducer, useState} from 'react'
 import './App.css'
 import Resume from './Components/Resume'
 import ResumeEditor from './Components/ResumeEditor'
@@ -17,55 +17,79 @@ function App() {
         experience: [],
         skills: []
     }
-    const [resumeObj, setResumeObj] = useState(initialResumeObjState)
     const [editableEduObj, setEditableEduObj] = useState(null)
     const [editableExpObj, setEditableExpObj] = useState(null)
+    const [resumeObj, dispatchResumeObj] = useReducer(resumeObjReducer, initialResumeObjState)
 
+    function resumeObjReducer(resumeObj, action) {
+        switch (action.type) {
+            case 'ADD_INTRO_DATA':
+                return {
+                    ... resumeObj,
+                    introduction: action.payload
+                };
+            case 'ADD_EDU_DATA':
+                return {
+                    ... resumeObj,
+                    education: [
+                        ... resumeObj.education,
+                        action.payload
+                    ]
+                };
+            case 'ADD_EXP_DATA':
+                return {
+                    ... resumeObj,
+                    experience: [
+                        ... resumeObj.experience,
+                        action.payload
+                    ]
+                };
+            case 'ADD_SKILL_DATA':
+                return {
+                    ... resumeObj,
+                    skills: action.payload
+                };
+            case 'DELETE_EDU/EXP':
+                if (action.payload.type === "exp") {
+                    return {
+                        ... resumeObj,
+                        experience: resumeObj.experience.filter(exp => exp.id !== action.payload.id)
+                    }
+                } else if (action.payload.type === "edu") {
+                    return {
+                        ... resumeObj,
+                        education: resumeObj.education.filter(edu => edu.id !== action.payload.id)
+                    }
 
-    function handleIntroData(exp) {
-        setResumeObj({
-            ...resumeObj,
-            introduction: exp
-        });
-    }
+                }
+            case 'UPDATE_EDU/EXP':
+                if (action.payload.type === "edu") {
+                    const indexOfEditedObj = resumeObj.education.findIndex(obj => obj.id === action.payload.editedObj.id)
+                    const newEduArr = [... resumeObj.education]
+                    newEduArr.splice(indexOfEditedObj, 1, action.payload.editedObj)
+                    setEditableEduObj(null)
+                    return {
+                        ... resumeObj,
+                        education: newEduArr
+                    }
 
-    function handleEduData(edu) {
-        setResumeObj({
-            ...resumeObj,
-            education: [
-                ...resumeObj.education,
-                edu
-            ]
-        });
-    }
-    function handleExpData(exp) {
-        setResumeObj({
-            ...resumeObj,
-            experience: [
-                ...resumeObj.experience,
-                exp
-            ]
-        });
-    }
-    function handleSkillData(skill) {
-        setResumeObj({
-            ...resumeObj,
-            skills: skill
-        });
-    }
-    function deleteEduExp(id, type) {
-        if (type === "exp") {
-            setResumeObj({
-                ...resumeObj,
-                experience: resumeObj.experience.filter(exp => exp.id !== id)
-            })
-        } else if (type === "edu") {
-            setResumeObj({
-                ...resumeObj,
-                education: resumeObj.education.filter(edu => edu.id !== id)
-            })
+                } else if (action.payload.type === "exp") {
+                    const indexOfEditedObj = resumeObj.experience.findIndex(obj => obj.id === action.payload.editedObj.id)
+                    const newExpArr = [... resumeObj.experience]
+                    newExpArr.splice(indexOfEditedObj, 1, action.payload.editedObj)
+                    setEditableExpObj(null)
+                    return {
+                        ... resumeObj,
+                        experience: newExpArr
+                    }
+
+                }
+
+            default:
+                return resumeObj
         }
     }
+
     function setEditableEduExpObj(id, type) {
         if (type === "edu") {
             setEditableEduObj(resumeObj.education.find(edu => edu.id === id))
@@ -74,39 +98,14 @@ function App() {
         }
         // console.log(editableEduExpObj)
     }
-    function handleUpdate(editedObj, type) {
-        if (type === "edu") {
-            const indexOfEditedObj = resumeObj.education.findIndex(obj => obj.id === editedObj.id)
-            const newEduArr = [...resumeObj.education]
-            newEduArr.splice(indexOfEditedObj, 1, editedObj)
-            setResumeObj({
-                ...resumeObj,
-                education: newEduArr
-            })
-            setEditableEduObj(null)
-        } else if (type === "exp") {
-            const indexOfEditedObj = resumeObj.experience.findIndex(obj => obj.id === editedObj.id)
-            const newExpArr = [...resumeObj.experience]
-            newExpArr.splice(indexOfEditedObj, 1, editedObj)
-            setResumeObj({
-                ...resumeObj,
-                experience: newExpArr
-            })
-            setEditableExpObj(null)
-        }
-    }
 
     return (
         <>
-            <ResumeEditor handleIntroData={handleIntroData}
-                handleEduData={handleEduData}
-                handleExpData={handleExpData}
-                handleSkillData={handleSkillData}
+            <ResumeEditor dispatchResumeObj={dispatchResumeObj}
                 editableEduObj={editableEduObj}
-                editableExpObj={editableExpObj}
-                handleUpdate={handleUpdate}></ResumeEditor>
+                editableExpObj={editableExpObj}></ResumeEditor>
             <Resume resumeObj={resumeObj}
-                deleteEduExp={deleteEduExp}
+                dispatchResumeObj={dispatchResumeObj}
                 setEditableEduExpObj={setEditableEduExpObj}></Resume>
         </>
     )

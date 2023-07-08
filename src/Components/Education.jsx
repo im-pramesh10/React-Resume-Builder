@@ -2,7 +2,7 @@ const Education = ({
     Institution,
     Location,
     Duration,
-    deleteEduExp,
+    dispatchResumeObj,
     id,
     setEditableEduExpObj
 }) => {
@@ -16,7 +16,13 @@ const Education = ({
                 {Duration}</div>
             <button className="noPrint"
                 onClick={
-                    () => deleteEduExp(id, "edu")
+                    () => dispatchResumeObj({
+                        type: 'DELETE_EDU/EXP',
+                        payload: {
+                            id: id,
+                            type: "edu"
+                        }
+                    })
             }>Delete</button>
             <button className="noPrint"
                 onClick={

@@ -7,7 +7,7 @@ function generateUniqueId() {
 }
 
 
-const IntroductionForm = ({handleIntroData}) => {
+const IntroductionForm = ({dispatchResumeObj}) => {
     const initialIntroData = {
         FirstName: "",
         LastName: "",
@@ -22,10 +22,9 @@ const IntroductionForm = ({handleIntroData}) => {
         e.preventDefault();
         e.stopPropagation();
         // console.log(e);
-        handleIntroData(introductionData);
+        dispatchResumeObj({type: 'ADD_INTRO_DATA', payload: introductionData})
     }
-    function handleChange(e) {
-        console.log(e.target.value)
+    function handleChange(e) { // console.log(e.target.value)
         setIntroductionData({
             ...introductionData,
             [e.target.name]: e.target.value
@@ -61,7 +60,7 @@ const IntroductionForm = ({handleIntroData}) => {
         </div>
     );
 }
-const EduExpForm = ({handleEduExpData, editableEduExpObj, handleUpdate, type}) => {
+const EduExpForm = ({dispatchResumeObj, editableEduExpObj, type}) => {
     const initialEduData = {
         Institution: "",
         Location: "",
@@ -95,10 +94,18 @@ const EduExpForm = ({handleEduExpData, editableEduExpObj, handleUpdate, type}) =
                 const newEditableObj = {
                     ...educationData
                 }
-                handleUpdate(newEditableObj, type)
+                // handleUpdate(newEditableObj, type)
+                dispatchResumeObj({
+                    type: 'UPDATE_EDU/EXP',
+                    payload: {
+                        editedObj: newEditableObj,
+                        type: type
+                    }
+                })
                 setEducationData(initialEduData)
             } else {
-                handleEduExpData(newEduObj);
+                (type === 'edu') ? dispatchResumeObj({type: 'ADD_EDU_DATA', payload: newEduObj}) : dispatchResumeObj({type: 'ADD_EXP_DATA', payload: newEduObj})
+
                 setEducationData(initialEduData)
             }
         }
@@ -135,13 +142,16 @@ const EduExpForm = ({handleEduExpData, editableEduExpObj, handleUpdate, type}) =
                     }
                     onChange={handleChange}
                     placeholder="Duration (2000-2004)"/>
-                <button onClick={handleAddButton}>{editableEduExpObj?'Update':'Add'}</button>
+                <button onClick={handleAddButton}>
+                    {
+                    editableEduExpObj ? 'Update' : 'Add'
+                }</button>
             </form>
         </div>
     );
 }
 
-const SkillForm = ({handleSkillData}) => {
+const SkillForm = ({dispatchResumeObj}) => {
     function handleAddButton(e) {
         e.preventDefault();
         // console.log(e.target.form[0].value);
@@ -155,8 +165,7 @@ const SkillForm = ({handleSkillData}) => {
         });
 
         // console.log(skillsArr);
-        handleSkillData(skillsArr)
-
+        dispatchResumeObj({type: 'ADD_SKILL_DATA', payload: skillsArr})
     }
 
     return (
