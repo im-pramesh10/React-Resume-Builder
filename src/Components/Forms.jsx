@@ -56,7 +56,7 @@ const IntroductionForm = ({handleIntroData}) => {
                 <input onChange={handleChange}
                     name="Bio"
                     placeholder="Bio/About"/>
-                <button onClick={handleAddButton}>Add</button>
+                <button onClick={handleAddButton}>Update</button>
             </form>
         </div>
     );
@@ -164,7 +164,7 @@ const SkillForm = ({handleSkillData}) => {
         <div className="skills">
             <form>
                 <input placeholder="js,css (use comma to separate)"/>
-                <button onClick={handleAddButton}>Add</button>
+                <button onClick={handleAddButton}>Update</button>
             </form>
         </div>
     );
