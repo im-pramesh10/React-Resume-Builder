@@ -61,7 +61,7 @@ const IntroductionForm = ({handleIntroData}) => {
         </div>
     );
 }
-const EduExpForm = ({handleEduExpData, editableEduExpObj}) => {
+const EduExpForm = ({handleEduExpData, editableEduExpObj, handleUpdate, type}) => {
     const initialEduData = {
         Institution: "",
         Location: "",
@@ -91,8 +91,16 @@ const EduExpForm = ({handleEduExpData, editableEduExpObj}) => {
                 ...educationData,
                 id: generateUniqueId()
             }
-            handleEduExpData(newEduObj);
-            setEducationData(initialEduData)
+            if (editableEduExpObj) {
+                const newEditableObj = {
+                    ...educationData
+                }
+                handleUpdate(newEditableObj, type)
+                setEducationData(initialEduData)
+            } else {
+                handleEduExpData(newEduObj);
+                setEducationData(initialEduData)
+            }
         }
     }
 
@@ -127,7 +135,7 @@ const EduExpForm = ({handleEduExpData, editableEduExpObj}) => {
                     }
                     onChange={handleChange}
                     placeholder="Duration (2000-2004)"/>
-                <button onClick={handleAddButton}>Add</button>
+                <button onClick={handleAddButton}>{editableEduExpObj?'Update':'Add'}</button>
             </form>
         </div>
     );

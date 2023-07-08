@@ -6,7 +6,8 @@ const ResumeEditor = ({
     handleExpData,
     handleSkillData,
     editableEduObj,
-    editableExpObj
+    editableExpObj,
+    handleUpdate
 }) => {
     return (
         <div className="noPrint editorContainer">
@@ -17,12 +18,12 @@ const ResumeEditor = ({
             <div className="expForms">
                 <h3>Experience</h3>
                 <EduExpForm handleEduExpData={handleExpData}
-                    editableEduExpObj={editableExpObj}></EduExpForm>
+                    editableEduExpObj={editableExpObj} handleUpdate={handleUpdate} type="exp"></EduExpForm>
             </div>
             <div className="eduForms">
                 <h3>Education</h3>
                 <EduExpForm handleEduExpData={handleEduData}
-                    editableEduExpObj={editableEduObj}></EduExpForm>
+                    editableEduExpObj={editableEduObj} handleUpdate={handleUpdate} type="edu"></EduExpForm>
 
             </div>
             <div className="skillForm">

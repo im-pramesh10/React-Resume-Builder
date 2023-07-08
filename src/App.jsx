@@ -66,13 +66,34 @@ function App() {
             })
         }
     }
-    function updateEduExp(id, type) {
+    function setEditableEduExpObj(id, type) {
         if (type === "edu") {
             setEditableEduObj(resumeObj.education.find(edu => edu.id === id))
         } else if (type === "exp") {
             setEditableExpObj(resumeObj.experience.find(exp => exp.id === id))
         }
         // console.log(editableEduExpObj)
+    }
+    function handleUpdate(editedObj, type) {
+        if (type === "edu") {
+            const indexOfEditedObj = resumeObj.education.findIndex(obj => obj.id === editedObj.id)
+            const newEduArr = [...resumeObj.education]
+            newEduArr.splice(indexOfEditedObj, 1, editedObj)
+            setResumeObj({
+                ...resumeObj,
+                education: newEduArr
+            })
+            setEditableEduObj(null)
+        } else if (type === "exp") {
+            const indexOfEditedObj = resumeObj.experience.findIndex(obj => obj.id === editedObj.id)
+            const newExpArr = [...resumeObj.experience]
+            newExpArr.splice(indexOfEditedObj, 1, editedObj)
+            setResumeObj({
+                ...resumeObj,
+                experience: newExpArr
+            })
+            setEditableExpObj(null)
+        }
     }
 
     return (
@@ -82,10 +103,11 @@ function App() {
                 handleExpData={handleExpData}
                 handleSkillData={handleSkillData}
                 editableEduObj={editableEduObj}
-                editableExpObj={editableExpObj}></ResumeEditor>
+                editableExpObj={editableExpObj}
+                handleUpdate={handleUpdate}></ResumeEditor>
             <Resume resumeObj={resumeObj}
                 deleteEduExp={deleteEduExp}
-                setEditableEduExpObj={updateEduExp}></Resume>
+                setEditableEduExpObj={setEditableEduExpObj}></Resume>
         </>
     )
 }
