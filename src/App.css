@@ -12,6 +12,25 @@ form {
 .flexItem {
     flex : 1 0 50%;
 }
+.githubLink {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    z-index: 1;
+  }
+.githubLinkImg{
+    height: auto;
+    width: 35px;
+  }
+.githubLinkImg:hover{
+    height: auto;
+    width: 40px;
+}
+
+.button {
+    z-index: 2;
+}
 @media(max-width : 600px) {.flexItem {
         flex-basis : 100%;
     }

@@ -117,6 +117,11 @@ function App() {
                             setEditableEduExpObj={setEditableEduExpObj}></Resume>
                     </div>
                 </div>
+
+                <a className='noPrint githubLink' href='https://github.com/im-pramesh10/React-Resume-Builder'>
+                    <img className='githubLinkImg' src='https://github.com/fluidicon.png'/>
+                </a>
+
             </RefHookContext.Provider>
         </DispatchResumeObjContext.Provider>
     )
