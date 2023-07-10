@@ -12,7 +12,7 @@ const Education = ({
     const formFocusRef = useContext(RefHookContext)
     const dispatchResumeObj = useContext(DispatchResumeObjContext);
     return (
-        <>
+        <div>
             <div className="institution">
                 {Institution}</div>
             <div className="location">
@@ -38,7 +38,7 @@ const Education = ({
             }>Update</button>
 
             <br/><br/>
-        </>
+        </div>
     );
 }
 

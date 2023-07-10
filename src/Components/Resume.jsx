@@ -7,15 +7,12 @@ const Resume = ({resumeObj, setEditableEduExpObj}) => {
 
     return (
         <>
-            <button className="noPrint"
-                onClick={
-                    () => window.print()
-            }>Print</button>
             <Introduction {...resumeObj.introduction}></Introduction>
             {
             // expression start
             resumeObj.experience.length !== 0 && <>
                 <div className="title">EXPIERIENCE</div>
+                <div className="gridContainer">
                 {
                 resumeObj.experience.map((experienceObj) => <Experience key={
                         experienceObj.id
@@ -25,14 +22,18 @@ const Resume = ({resumeObj, setEditableEduExpObj}) => {
                         experienceObj.id
                     }
                     setEditableEduExpObj={setEditableEduExpObj}></Experience>)
-            } </>
+            }   </div>
+            </>
         }
             {
             // expression start
             resumeObj.education.length !== 0 && <>
                 <div className="title">EDUCATION</div>
+                <div className="gridContainer">
+
+                
                 {
-                resumeObj.education.map(educationObj => <Education key={
+                resumeObj.education.map(educationObj =><Education key={
                         educationObj.id
                     }
                     {...educationObj}
@@ -40,7 +41,7 @@ const Resume = ({resumeObj, setEditableEduExpObj}) => {
                         educationObj.id
                     }
                     setEditableEduExpObj={setEditableEduExpObj}></Education>)
-            } </>
+            }</div> </>
         }
 
             {
@@ -51,7 +52,8 @@ const Resume = ({resumeObj, setEditableEduExpObj}) => {
                 resumeObj.skills.map((skill, index) => <Skills key={index}
                     skill={skill}></Skills>)
             } </>
-        } </>
+        } 
+        </>
     );
 }
 

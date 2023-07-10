@@ -1,3 +1,22 @@
+form {
+    width: 100px;
+    /* height: 20px; */
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr;
+    grid-gap: 10px;
+}
+.flexContainer {
+    display : flex;
+    flex-wrap : wrap;
+}
+.flexItem {
+    flex : 1 0 50%;
+}
+@media(max-width : 600px) {.flexItem {
+        flex-basis : 100%;
+    }
+}
+
 @media print {.noPrint {
         display : none;
     }
@@ -8,11 +27,4 @@
     body {
         margin : 2.0cm;
     }
-}
-.flexContainer {
-    display : flex;
-    flex-wrap: wrap;
-}
-.flexItem{
-    flex: 1;
 }

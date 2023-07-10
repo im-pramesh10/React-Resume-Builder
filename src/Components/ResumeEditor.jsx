@@ -30,7 +30,11 @@ const ResumeEditor = ({editableEduObj, editableExpObj}) => {
             <div className="skillForm">
                 <h3>Skills</h3>
                 <SkillForm></SkillForm>
-            </div>
+            </div><br/>
+            <button className="noPrint"
+                onClick={
+                    () => window.print()
+            }>Print Resume</button>
         </div>
     );
 }

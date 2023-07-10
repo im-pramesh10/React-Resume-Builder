@@ -1,6 +1,7 @@
 import {useContext} from "react";
 import DispatchResumeObjContext from "../Contexts/DispatchResumeObjContext";
 import RefHookContext from "../Contexts/useRefHookContext";
+import "./ExperienceEducation.css"
 
 const Experience = ({
     Institution,
@@ -12,7 +13,7 @@ const Experience = ({
     const dispatchResumeObj = useContext(DispatchResumeObjContext)
     const formFocusRef = useContext(RefHookContext)
     return (
-        <>
+        <div>
             <div className="institution">
                 {Institution}</div>
             <div className="location">
@@ -39,7 +40,7 @@ const Experience = ({
             }>Update</button>
 
             <br/><br/>
-        </>
+        </div>
     );
 }
 
