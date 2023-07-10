@@ -1,12 +1,18 @@
-@media print {
-    .noPrint {
-        display:none;
-      }
-      @page {
-        size: a4;   /* auto is the initial value */
-        margin: 0;  /*this affects the margin in the printer settings */
+@media print {.noPrint {
+        display : none;
     }
-    body{
-        margin: 2.0cm;
+    @page {
+        size : a4; /* auto is the initial value */
+        margin : 0; /*this affects the margin in the printer settings */
     }
+    body {
+        margin : 2.0cm;
     }
+}
+.flexContainer {
+    display : flex;
+    flex-wrap: wrap;
+}
+.flexItem{
+    flex: 1;
+}

@@ -1,5 +1,6 @@
 import {useContext} from "react";
 import DispatchResumeObjContext from "../Contexts/DispatchResumeObjContext";
+import RefHookContext from "../Contexts/useRefHookContext";
 
 const Experience = ({
     Institution,
@@ -9,6 +10,7 @@ const Experience = ({
     setEditableEduExpObj
 }) => {
     const dispatchResumeObj = useContext(DispatchResumeObjContext)
+    const formFocusRef = useContext(RefHookContext)
     return (
         <>
             <div className="institution">
@@ -29,7 +31,11 @@ const Experience = ({
             }>Delete</button>
             <button className="noPrint"
                 onClick={
-                    () => setEditableEduExpObj(id, "exp")
+                    () => {
+                        setEditableEduExpObj(id, "exp")
+                        formFocusRef.current[0].focus()
+
+                    }
             }>Update</button>
 
             <br/><br/>

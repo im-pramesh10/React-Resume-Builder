@@ -63,13 +63,12 @@ const IntroductionForm = () => {
     );
 }
 
-const EduExpForm = ({editableEduExpObj, type}) => {
+const EduExpForm = ({Ref, editableEduExpObj, type}) => {
     const initialEduData = {
         Institution: "",
         Location: "",
         Duration: ""
     }
-
     const [educationData, setEducationData] = useState(initialEduData)
     const dispatchResumeObj = useContext(DispatchResumeObjContext)
     useEffect(() => {
@@ -128,7 +127,7 @@ const EduExpForm = ({editableEduExpObj, type}) => {
     return (
         <div className="education">
             <form>
-                <input name="Institution"
+                <input ref={Ref} name="Institution"
                     value={
                         educationData.Institution
                     }

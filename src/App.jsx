@@ -1,8 +1,9 @@
-import {useReducer, useState} from 'react'
+import {useReducer, useRef, useState} from 'react'
 import './App.css'
 import Resume from './Components/Resume'
 import ResumeEditor from './Components/ResumeEditor'
 import DispatchResumeObjContext from './Contexts/DispatchResumeObjContext'
+import RefHookContext from './Contexts/useRefHookContext'
 
 function App() {
     const initialResumeObjState = {
@@ -21,6 +22,8 @@ function App() {
     const [editableEduObj, setEditableEduObj] = useState(null)
     const [editableExpObj, setEditableExpObj] = useState(null)
     const [resumeObj, dispatchResumeObj] = useReducer(resumeObjReducer, initialResumeObjState)
+
+    const eduExpRef = useRef([]);
 
     function resumeObjReducer(resumeObj, action) {
         switch (action.type) {
@@ -103,10 +106,18 @@ function App() {
     return (
 
         <DispatchResumeObjContext.Provider value={dispatchResumeObj}>
-            <ResumeEditor editableEduObj={editableEduObj}
-                editableExpObj={editableExpObj}></ResumeEditor>
-            <Resume resumeObj={resumeObj}
-                setEditableEduExpObj={setEditableEduExpObj}></Resume>
+            <RefHookContext.Provider value={eduExpRef}>
+                <div className='flexContainer'>
+                    <div className='noPrint flexItem'>
+                        <ResumeEditor editableEduObj={editableEduObj}
+                            editableExpObj={editableExpObj}></ResumeEditor>
+                    </div>
+                    <div className='flexItem'>
+                        <Resume resumeObj={resumeObj}
+                            setEditableEduExpObj={setEditableEduExpObj}></Resume>
+                    </div>
+                </div>
+            </RefHookContext.Provider>
         </DispatchResumeObjContext.Provider>
     )
 }

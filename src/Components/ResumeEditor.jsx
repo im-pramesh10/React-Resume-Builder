@@ -1,6 +1,9 @@
+import {useContext} from "react";
 import {IntroductionForm, EduExpForm, SkillForm} from "./Forms";
+import RefHookContext from "../Contexts/useRefHookContext";
 
 const ResumeEditor = ({editableEduObj, editableExpObj}) => {
+    const childRef = useContext(RefHookContext)
     return (
         <div className="noPrint editorContainer">
             <div className="introForm">
@@ -9,12 +12,18 @@ const ResumeEditor = ({editableEduObj, editableExpObj}) => {
             </div>
             <div className="expForms">
                 <h3>Experience</h3>
-                <EduExpForm editableEduExpObj={editableExpObj}
+                <EduExpForm Ref={
+                        ((el) => childRef.current[0] = el)
+                    }
+                    editableEduExpObj={editableExpObj}
                     type="exp"></EduExpForm>
             </div>
             <div className="eduForms">
                 <h3>Education</h3>
-                <EduExpForm editableEduExpObj={editableEduObj}
+                <EduExpForm Ref={
+                        (el) => (childRef.current[1] = el)
+                    }
+                    editableEduExpObj={editableEduObj}
                     type="edu"></EduExpForm>
 
             </div>
