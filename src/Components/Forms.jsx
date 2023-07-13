@@ -1,6 +1,6 @@
 // import resumeObj from "../Data/ResumeObj";
 
-import {memo, useContext, useEffect, useState} from "react";
+import { memo, useContext, useEffect, useState} from "react";
 import DispatchResumeObjContext from "../Contexts/DispatchResumeObjContext";
 
 function generateUniqueId() {
@@ -8,7 +8,7 @@ function generateUniqueId() {
 }
 
 
-const IntroductionForm = () => {
+const IntroductionForm = memo(() => {
     const initialIntroData = {
         FirstName: "",
         LastName: "",
@@ -61,9 +61,9 @@ const IntroductionForm = () => {
             </form>
         </div>
     );
-}
+})
 
-const EduExpForm = ({Ref, editableEduExpObj, type}) => {
+const EduExpForm = memo(({Ref, editableEduExpObj, type}) => {
     const initialEduData = {
         Institution: "",
         Location: "",
@@ -152,9 +152,9 @@ const EduExpForm = ({Ref, editableEduExpObj, type}) => {
             </form>
         </div>
     );
-}
+})
 
-const SkillForm = () => {
+const SkillForm = memo(() => {
     const dispatchResumeObj = useContext(DispatchResumeObjContext)
     function handleAddButton(e) {
         e.preventDefault();
@@ -181,7 +181,7 @@ const SkillForm = () => {
             </form>
         </div>
     );
-}
+})
 export {
     SkillForm,
     EduExpForm,

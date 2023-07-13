@@ -1,4 +1,4 @@
-import {useReducer, useRef, useState} from 'react'
+import {useCallback, useReducer, useRef, useState} from 'react'
 import './App.css'
 import Resume from './Components/Resume'
 import ResumeEditor from './Components/ResumeEditor'
@@ -94,14 +94,14 @@ function App() {
         }
     }
 
-    function setEditableEduExpObj(id, type) {
+    const setEditableEduExpObj = useCallback((id, type) => {
         if (type === "edu") {
             setEditableEduObj(resumeObj.education.find(edu => edu.id === id))
         } else if (type === "exp") {
             setEditableExpObj(resumeObj.experience.find(exp => exp.id === id))
         }
         // console.log(editableEduExpObj)
-    }
+    }, [resumeObj])
 
     return (<DispatchResumeObjContext.Provider value={dispatchResumeObj}>
         <RefHookContext.Provider value={eduExpRef}>
