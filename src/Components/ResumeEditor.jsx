@@ -1,4 +1,4 @@
-import {useContext} from "react";
+import {memo, useContext} from "react";
 import {IntroductionForm, EduExpForm, SkillForm} from "./Forms";
 import RefHookContext from "../Contexts/useRefHookContext";
 
@@ -39,4 +39,4 @@ const ResumeEditor = ({editableEduObj, editableExpObj}) => {
     );
 }
 
-export default ResumeEditor;
+export default memo(ResumeEditor);

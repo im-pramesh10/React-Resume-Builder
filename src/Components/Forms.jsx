@@ -1,6 +1,6 @@
 // import resumeObj from "../Data/ResumeObj";
 
-import {useContext, useEffect, useState} from "react";
+import {memo, useContext, useEffect, useState} from "react";
 import DispatchResumeObjContext from "../Contexts/DispatchResumeObjContext";
 
 function generateUniqueId() {

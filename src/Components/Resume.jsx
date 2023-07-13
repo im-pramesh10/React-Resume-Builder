@@ -3,6 +3,7 @@ import Experience from "./Experience";
 import Introduction from "./Introduction";
 import Skills from "./Skills";
 import "./Resume.css"
+import { memo } from "react";
 const Resume = ({resumeObj, setEditableEduExpObj}) => {
 
     return (
@@ -57,4 +58,4 @@ const Resume = ({resumeObj, setEditableEduExpObj}) => {
     );
 }
 
-export default Resume;
+export default memo(Resume);

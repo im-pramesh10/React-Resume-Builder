@@ -103,28 +103,22 @@ function App() {
         // console.log(editableEduExpObj)
     }
 
-    return (
-
-        <DispatchResumeObjContext.Provider value={dispatchResumeObj}>
-            <RefHookContext.Provider value={eduExpRef}>
-                <div className='flexContainer'>
-                    <div className='noPrint flexItem'>
-                        <ResumeEditor editableEduObj={editableEduObj}
-                            editableExpObj={editableExpObj}></ResumeEditor>
-                    </div>
-                    <div className='flexItem'>
-                        <Resume resumeObj={resumeObj}
-                            setEditableEduExpObj={setEditableEduExpObj}></Resume>
-                    </div>
+    return (<DispatchResumeObjContext.Provider value={dispatchResumeObj}>
+        <RefHookContext.Provider value={eduExpRef}>
+            <div className='flexContainer'>
+                <div className='noPrint flexItem'>
+                    <ResumeEditor editableEduObj={editableEduObj}
+                        editableExpObj={editableExpObj}/>
                 </div>
+                <div className='flexItem'>
+                    <Resume resumeObj={resumeObj}
+                        setEditableEduExpObj={setEditableEduExpObj}/>
+                </div>
+            </div>
 
-                <a className='noPrint githubLink' href='https://github.com/im-pramesh10/React-Resume-Builder'>
-                    <img className='githubLinkImg' src='https://github.com/fluidicon.png'/>
-                </a>
 
-            </RefHookContext.Provider>
-        </DispatchResumeObjContext.Provider>
-    )
+        </RefHookContext.Provider>
+    </DispatchResumeObjContext.Provider>)
 }
 
 export default App
